@@ -7,7 +7,7 @@ rm -rf /usr/share/nginx/html/*
 # downloading the original roboshop content
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
 cd /usr/share/nginx/html
-#unzipping the roboshop files
+# unzipping the roboshop files
 unzip /tmp/frontend.zip
 
 systemctl enable nginx
