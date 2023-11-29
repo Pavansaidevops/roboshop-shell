@@ -1,6 +1,6 @@
 # copying the shiiping service file
 cp shipping.service /etc/systemd/system/shipping.service
-# installing the maven
+# installing maven
 dnf install maven -y
 # adding the user and created an directory and also downloading the shipping content and then installing required dependencies
 useradd roboshop

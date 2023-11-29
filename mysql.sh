@@ -1,6 +1,6 @@
 # copying the mysql repo file
 cp mysql.repo /etc/yum.repos.d/mysql.repo
-# # disabling the default mysql module and installing the mysql
+# # disabling the default mysql module and installing mysql
 dnf module disable mysql -y
 dnf install mysql-community-server -y
 

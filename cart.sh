@@ -1,6 +1,6 @@
 # copying the cart service file
 cp cart.service /etc/systemd/system/cart.service
-# disabling the default nodejs and enabling the required nodejs and then installing the nodejs
+# disabling the default nodejs and enabling the required nodejs and then installing nodejs
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
 dnf install nodejs -y

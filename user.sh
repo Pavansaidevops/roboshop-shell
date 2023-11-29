@@ -2,7 +2,7 @@
 cp user.service /etc/systemd/system/user.service
 # copying the mongo repo file
 cp mongo.repo /etc/yum.repos.d/mongo.repo
-# disabling the default nodejs  and enabling the required nodejs and then installing nodejs
+# disabling the default nodejs and enabling the required nodejs and then installing nodejs
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
 dnf install nodejs -y

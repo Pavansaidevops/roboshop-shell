@@ -1,6 +1,6 @@
 # copying the payment service file
 cp payment.service /etc/systemd/system/payment.service
-# installing the python
+# installing python
 dnf install python36 gcc python3-devel -y
 # adding the user and created an directory and also downloading the payment content and installing required dependencies
 useradd roboshop
