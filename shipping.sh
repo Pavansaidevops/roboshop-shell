@@ -1,4 +1,4 @@
-# copying the shiiping service file
+# copying the shipping service file
 cp shipping.service /etc/systemd/system/shipping.service
 # installing maven
 dnf install maven -y
@@ -13,7 +13,7 @@ mvn clean package
 mv target/shipping-1.0.jar shipping.jar
 # installing the mysql and loading the schema
 dnf install mysql -y
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql
+mysql -h mysql.pavansai.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
 
 systemctl daemon-reload
 systemctl enable shipping

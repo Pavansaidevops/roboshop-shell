@@ -16,7 +16,7 @@ cd /app
 npm install
 # installing the mongodb shell and loading the schema
 dnf install mongodb-org-shell -y
-mongo --host MONGODB-SERVER-IPADDRESS </app/schema/user.js
+mongo --host mongodb.pavansai.online </app/schema/user.js
 
 systemctl daemon-reload
 systemctl enable user
