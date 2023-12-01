@@ -1,5 +1,5 @@
 # installing nginx
-yum install nginx -y
+dnf install nginx -y
 # copying the roboshop configuration file
 cp nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf
 # removing the default nginx page
