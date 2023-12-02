@@ -1,33 +1,33 @@
 # copying the catalogue service file
-echo -e ">>>>>>>>>>>>>>>>> Create Catalogue Service file <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Create Catalogue Service file <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 cp catalogue.service /etc/systemd/system/catalogue.service
 # copying the mongo repo file
-echo -e ">>>>>>>>>>>>>>>>> create Catalogue Mongo repo file <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> create Catalogue Mongo repo file <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 # disabling,enabling and installing the nodejs
-echo -e ">>>>>>>>>>>>>>>>> Disabling,Enabling and installing nodeJS <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Disabling,Enabling and installing nodeJS <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 dnf module disable nodejs -y
 dnf module enable nodejs:18 -y
 dnf install nodejs -y
 # adding the user and created an directory and also downloading the catalogue content and then installing required dependencies
-echo -e ">>>>>>>>>>>>>>>>> Creating Application User <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Creating Application User <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 useradd roboshop
-echo -e ">>>>>>>>>>>>>>>>> Creating application Directory <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Creating application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 mkdir /app
-echo -e ">>>>>>>>>>>>>>>>> Downloading application Content <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Downloading application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
-echo -e ">>>>>>>>>>>>>>>>> Extracting Application Content <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Extracting Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 cd /app
 unzip /tmp/catalogue.zip
 cd /app
-echo -e ">>>>>>>>>>>>>>>>> Downloading NodeJS Dependencies <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Downloading NodeJS Dependencies <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 npm install
 # installing the mongodb shell
-echo -e ">>>>>>>>>>>>>>>>> Installing Mongodb Client <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Installing Mongodb Client <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 dnf install mongodb-org-shell -y
-echo -e ">>>>>>>>>>>>>>>>> Loading Catalogue Schema <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Loading Catalogue Schema <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 mongo --host mongodb.pavansai.online </app/schema/catalogue.js
-echo -e ">>>>>>>>>>>>>>>>> Starting Catalogue Service <<<<<<<<<<<<<<<<<<<<<"
+echo -e "\e[34m >>>>>>>>>>>>>>>>> Starting Catalogue Service <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 systemctl daemon-reload
 systemctl enable catalogue
 systemctl restart catalogue
