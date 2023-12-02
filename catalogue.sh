@@ -1,36 +1,36 @@
 # copying the catalogue service file
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Create Catalogue Service file <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-cp catalogue.service /etc/systemd/system/catalogue.service >/tmp/roboshop.log
+cp catalogue.service /etc/systemd/system/catalogue.service &>/tmp/roboshop.log
 # copying the mongo repo file
 echo -e "\e[37m >>>>>>>>>>>>>>>>> create Catalogue Mongo repo file <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-cp mongo.repo /etc/yum.repos.d/mongo.repo >/tmp/roboshop.log
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>/tmp/roboshop.log
 # disabling,enabling and installing the nodejs
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Disabling,Enabling and installing nodeJS <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-dnf module disable nodejs -y >/tmp/roboshop.log
-dnf module enable nodejs:18 -y >/tmp/roboshop.log
-dnf install nodejs -y >/tmp/roboshop.log
+dnf module disable nodejs -y &>/tmp/roboshop.log
+dnf module enable nodejs:18 -y &>/tmp/roboshop.log
+dnf install nodejs -y &>/tmp/roboshop.log
 # adding the user and created an directory and also downloading the catalogue content and then installing required dependencies
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Creating Application User <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-useradd roboshop >/tmp/roboshop.log
+useradd roboshop &>/tmp/roboshop.log
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Removing Application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-rm -rf /app >/tmp/roboshop.log
+rm -rf /app &>/tmp/roboshop.log
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Creating application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-mkdir /app >/tmp/roboshop.log
+mkdir /app &>/tmp/roboshop.log
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip >/tmp/roboshop.log
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>/tmp/roboshop.log
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Extracting Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-cd /app >/tmp/roboshop.log
-unzip /tmp/catalogue.zip >/tmp/roboshop.log
-cd /app >/tmp/roboshop.log
+cd /app &>/tmp/roboshop.log
+unzip /tmp/catalogue.zip &>/tmp/roboshop.log
+cd /app &>/tmp/roboshop.log
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading NodeJS Dependencies <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-npm install >/tmp/roboshop.log
+npm install &>/tmp/roboshop.log
 # installing the mongodb shell
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Mongodb Client <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-dnf install mongodb-org-shell -y >/tmp/roboshop.log
+dnf install mongodb-org-shell -y &>/tmp/roboshop.log
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Loading Catalogue Schema <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-mongo --host mongodb.pavansai.online </app/schema/catalogue.js >/tmp/roboshop.log
+mongo --host mongodb.pavansai.online </app/schema/catalogue.js &>/tmp/roboshop.log
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Starting Catalogue Service <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-systemctl daemon-reload >/tmp/roboshop.log
-systemctl enable catalogue >/tmp/roboshop.log
-systemctl restart catalogue >/tmp/roboshop.log
+systemctl daemon-reload &>/tmp/roboshop.log
+systemctl enable catalogue &>/tmp/roboshop.log
+systemctl restart catalogue &>/tmp/roboshop.log
 
