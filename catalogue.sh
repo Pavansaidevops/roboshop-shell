@@ -13,7 +13,7 @@ dnf install nodejs -y &>>${log}
 # adding the user and created an directory and also downloading the catalogue content and then installing required dependencies
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Creating Application User <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 useradd roboshop &>>${log}
-echo -e "\e[37m >>>>>>>>>>>>>>>>> Removing Application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+echo -e "\e[37m >>>>>>>>>>>>>>>>> Removing existing Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 rm -rf /app &>>${log}
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Creating application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 mkdir /app &>>${log}
