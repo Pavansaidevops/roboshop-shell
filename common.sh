@@ -18,7 +18,11 @@ func_apppreq(){
 
   # adding the user and created an directory and also downloading the ${component} content and then installing required dependencies
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Adding Application User <<<<<<<<<<<<<<<<<<<\e[0m"
+  id roboshop &>>{log}
+  if [ $? -ne 0 ]; then
   useradd roboshop &>>${log}
+  fi
+
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Removing existing Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
   rm -rf /app &>>${log}
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Creating application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
