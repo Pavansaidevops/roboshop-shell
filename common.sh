@@ -36,5 +36,3 @@ systemctl daemon-reload &>>${log}
 systemctl enable ${component} &>>${log}
 systemctl restart ${component} &>>${log}
 }
-
-func_nodejs
