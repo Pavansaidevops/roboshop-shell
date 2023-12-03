@@ -76,10 +76,26 @@ func_java(){
 func_python(){
   # installing python
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Python <<<<<<<<<<<<<<<<<<\e[0m"
-  dnf install python36 gcc python3-devel -y
+  dnf install python36 gcc python3-devel -y &>>{log}
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Python Requirements <<<<<<<<<<<<<<<<<<\e[0m"
-  pip3.6 install -r requirements.txt
+  pip3.6 install -r requirements.txt &>>{log}
   
+  func_systemd
+
+}
+
+func_go(){
+  # installing golang
+  echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Golang <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+  dnf install golang -y &>>${log}
+
+  func_apppreq
+
+  echo -e "\e[37m >>>>>>>>>>>>>>>>> Build ${component} Service <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+  go mod init dispatch &>>${log}
+  go get &>>${log}
+  go build &>>${log}
+
   func_systemd
 
 }
