@@ -83,6 +83,7 @@ func_schema_setup(){
        func_exit_status
 
   fi
+
 }
 
 func_nodejs(){
