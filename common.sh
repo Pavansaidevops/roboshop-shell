@@ -70,7 +70,7 @@ func_nodejs(){
 
 func_java(){
   # installing maven
-  echo -e"\e[37m >>>>>>>>>>>>>>>>> Installing Maven <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+  echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Maven <<<<<<<<<<<<<<<<<<<<<<\e[0m"
   dnf install maven -y &>>${log}
 
   func_apppreq
