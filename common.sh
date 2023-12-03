@@ -56,7 +56,7 @@ func_systemd
 }
 
 func_java(){
-
+  log=/tmp/roboshop.log
   # copying the ${component} service file
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Create ${component} Service file <<<<<<<<<<<<<<<<<<<<<<\e[0m"
   cp ${component}.service /etc/systemd/system/${component}.service &>>${log}
