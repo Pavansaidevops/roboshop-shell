@@ -21,9 +21,9 @@ mkdir /app &>>${log}
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Extracting Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-cd /app &>>${log}
+cd /app
 unzip /tmp/${component}.zip &>>${log}
-cd /app &>>${log}
+cd /app
 echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading NodeJS Dependencies <<<<<<<<<<<<<<<<<<<<<<\e[0m"
 npm install &>>${log}
 # installing the mongodb shell
@@ -36,4 +36,5 @@ systemctl daemon-reload &>>${log}
 systemctl enable ${component} &>>${log}
 systemctl restart ${component} &>>${log}
 }
+
 func_nodejs
