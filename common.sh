@@ -77,6 +77,9 @@ func_python(){
   # installing python
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Python <<<<<<<<<<<<<<<<<<\e[0m"
   dnf install python36 gcc python3-devel -y &>>{log}
+
+  func_apppreq
+
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Python Requirements <<<<<<<<<<<<<<<<<<\e[0m"
   pip3.6 install -r requirements.txt &>>{log}
   
