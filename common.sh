@@ -28,27 +28,43 @@ func_systemd(){
 
 }
 
+func_schema_setup(){
+
+  if [ "${schema_type}" == "mongodb" ]; then
+   # installing the mongodb shell
+     echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Mongodb Client <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+     dnf install mongodb-org-shell -y &>>${log}
+     echo -e "\e[37m >>>>>>>>>>>>>>>>> Loading ${component} Schema <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+     mongo --host mongodb.pavansai.online </app/schema/${component}.js &>>${log}
+  fi
+
+  if [ "${schema_type}" == "mysql" ]; then
+     # installing the mysql and loading the schema
+       echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Mysql <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+       dnf install mysql -y &>>${log}
+       echo -e "\e[37m >>>>>>>>>>>>>>>>> Loading ${component} Schema <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+       mysql -h mysql.pavansai.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log}
+   fi
+}
+
 func_nodejs(){
- # copying the mongo repo file
- echo -e "\e[37m >>>>>>>>>>>>>>>>> create ${component} Mongo repo file <<<<<<<<<<<<<<<<<<<<<<\e[0m"
- cp mongo.repo /etc/yum.repos.d/mongo.repo &>>${log}
- # disabling,enabling and installing the nodejs
- echo -e "\e[37m >>>>>>>>>>>>>>>>> Disabling,Enabling and installing nodeJS <<<<<<<<<<<<<<<<<<<<<<\e[0m"
- dnf module disable nodejs -y &>>${log}
- dnf module enable nodejs:18 -y &>>${log}
- dnf install nodejs -y &>>${log}
+  # copying the mongo repo file
+  echo -e "\e[37m >>>>>>>>>>>>>>>>> create ${component} Mongo repo file <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+  cp mongo.repo /etc/yum.repos.d/mongo.repo &>>${log}
+  # disabling,enabling and installing the nodejs
+  echo -e "\e[37m >>>>>>>>>>>>>>>>> Disabling,Enabling and installing nodeJS <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+  dnf module disable nodejs -y &>>${log}
+  dnf module enable nodejs:18 -y &>>${log}
+  dnf install nodejs -y &>>${log}
 
-func_apppreq
+  func_apppreq
 
- echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading NodeJS Dependencies <<<<<<<<<<<<<<<<<<<<<<\e[0m"
- npm install &>>${log}
- # installing the mongodb shell
- echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Mongodb Client <<<<<<<<<<<<<<<<<<<<<<\e[0m"
- dnf install mongodb-org-shell -y &>>${log}
- echo -e "\e[37m >>>>>>>>>>>>>>>>> Loading ${component} Schema <<<<<<<<<<<<<<<<<<<<<<\e[0m"
- mongo --host mongodb.pavansai.online </app/schema/${component}.js &>>${log}
+  echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading NodeJS Dependencies <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+  npm install &>>${log}
 
- func_systemd
+  func_schema_setup
+
+  func_systemd
 
 }
 
@@ -63,11 +79,8 @@ func_java(){
   mvn clean package &>>${log}
   echo -e "\e[37m >>>>>>>>>>>>>>>>> Renaming ${component} file name <<<<<<<<<<<<<<<<<<<<<<\e[0m"
   mv target/${component}-1.0.jar ${component}.jar &>>${log}
-  # installing the mysql and loading the schema
-  echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Mysql <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-  dnf install mysql -y &>>${log}
-  echo -e "\e[37m >>>>>>>>>>>>>>>>> Loading ${component} Schema <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-  mysql -h mysql.pavansai.online -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${log}
+
+  func_schema_setup
 
   func_systemd
 
