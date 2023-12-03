@@ -17,26 +17,29 @@ func_apppreq(){
    func_exit_status
 
   # adding the user and created an directory and also downloading the ${component} content and then installing required dependencies
-  echo -e "\e[37m >>>>>>>>>>>>>>>>> Adding Application User <<<<<<<<<<<<<<<<<<<\e[0m"
-  id roboshop &>>{log}
-  if [ $? -ne 0 ]; then
-  useradd roboshop &>>${log}
-  fi
+   echo -e "\e[37m >>>>>>>>>>>>>>>>> Adding Application User <<<<<<<<<<<<<<<<<<<\e[0m"
+   id roboshop &>>{log}
+   if [ $? -ne 0 ]; then
+   useradd roboshop &>>${log}
+   fi
 
-  echo -e "\e[37m >>>>>>>>>>>>>>>>> Removing existing Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-  rm -rf /app &>>${log}
-  echo -e "\e[37m >>>>>>>>>>>>>>>>> Creating application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-  mkdir /app &>>${log}
-  echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-  curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
+   func_exit_status
 
-  func_exit_status
 
-  echo -e "\e[37m >>>>>>>>>>>>>>>>> Extracting Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
-  cd /app
-  unzip /tmp/${component}.zip &>>${log}
+   echo -e "\e[37m >>>>>>>>>>>>>>>>> Removing existing Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+   rm -rf /app &>>${log}
+   echo -e "\e[37m >>>>>>>>>>>>>>>>> Creating application Directory <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+   mkdir /app &>>${log}
+   echo -e "\e[37m >>>>>>>>>>>>>>>>> Downloading application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
 
-  func_exit_status
+   func_exit_status
+
+   echo -e "\e[37m >>>>>>>>>>>>>>>>> Extracting Application Content <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+   cd /app
+   unzip /tmp/${component}.zip &>>${log}
+
+   func_exit_status
 
 }
 
