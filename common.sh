@@ -72,7 +72,7 @@ func_schema_setup(){
 
   if [ "${schema_type}" == "mysql" ]; then
      # installing the mysql and loading the schema
-       echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Mysql <<<<<<<<<<<<<<<<<<<<<<\e[0m"
+       echo -e "\e[37m >>>>>>>>>>>>>>>>> Installing Mysql Client <<<<<<<<<<<<<<<<<<<<<<\e[0m"
        dnf install mysql -y &>>${log}
 
        func_exit_status
@@ -82,7 +82,7 @@ func_schema_setup(){
 
        func_exit_status
 
-   fi
+  fi
 }
 
 func_nodejs(){
